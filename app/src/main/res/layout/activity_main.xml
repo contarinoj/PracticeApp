@@ -7,15 +7,25 @@
 
     <TextView
         android:text="@string/hello_world"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/not_button"/>
 
     <Button
-        android:layout_below="@id/not_button"
+        android:layout_toRightOf="@id/not_button"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/default_button_text"
-        android:id="@+id/button" />
+        android:text="+"
+        android:id="@+id/up_button" />
+
+    <Button
+        android:layout_toLeftOf="@id/not_button"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/down_button" />
 
 </RelativeLayout>

@@ -10,18 +10,29 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textView;
-    private Button button;
+    private Button buttonLeft;
+    private Button buttonRight;
 
     @Override
     public void onClick(View v)
     {
+
         try {
-            int i = Integer.parseInt(button.getText().toString());
-            button.setText(""+(i+1));
+            int i = Integer.parseInt(textView.getText().toString());
+            switch(v.getId()){
+                case R.id.up_button:
+                    textView.setText(""+(i+1));
+                    break;
+                case R.id.down_button:
+                    textView.setText(""+(i-1));
+                    break;
+                default:
+
+            }
         }
         catch (IllegalArgumentException e)
         {
-            button.setText("I Broke :(");
+            textView.setText("I Broke :(");
         }
     }
 
@@ -30,14 +41,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.not_button);
-        button = (Button) findViewById(R.id.button);
+        buttonRight = (Button) findViewById(R.id.up_button);
+        buttonLeft = (Button) findViewById(R.id.down_button);
         /*button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });*/
-        button.setOnClickListener(this);
+        buttonRight.setOnClickListener(this);
+        buttonLeft.setOnClickListener(this);
 
     }
 
