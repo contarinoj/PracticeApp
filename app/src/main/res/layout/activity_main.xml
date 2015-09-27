@@ -28,4 +28,18 @@
         android:text="-"
         android:id="@+id/down_button" />
 
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What does this do?"
+        android:id="@+id/mystery_button"/>
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/mystery_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/output_text"/>
+
 </RelativeLayout>

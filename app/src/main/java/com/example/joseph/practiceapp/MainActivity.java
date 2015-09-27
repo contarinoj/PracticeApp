@@ -8,10 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoadFinished{
     private TextView textView;
+    private TextView mysteryText;
     private Button buttonLeft;
     private Button buttonRight;
+    private Button mysteryButton;
+
+    @Override
+    public void onLoadFinished(String str){
+            if(!isFinishing())
+            {
+                mysteryText.setText(str);
+            }
+    }
 
     @Override
     public void onClick(View v)
@@ -41,16 +51,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.not_button);
+        mysteryText = (TextView) findViewById(R.id.output_text);
+
         buttonRight = (Button) findViewById(R.id.up_button);
         buttonLeft = (Button) findViewById(R.id.down_button);
-        /*button.setOnClickListener(new View.OnClickListener() {
+        mysteryButton = (Button) findViewById(R.id.mystery_button);
+
+        mysteryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mysteryText.setText(R.string.default_loading_text);
+                new LoadingTask(MainActivity.this).execute();
             }
-        });*/
+        });
+
         buttonRight.setOnClickListener(this);
         buttonLeft.setOnClickListener(this);
+
+
 
     }
 
