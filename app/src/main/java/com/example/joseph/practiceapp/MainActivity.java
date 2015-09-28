@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoadFinished{
+    public static final String MAIN_ACTIVITY = "main_activity";
     private TextView textView;
     private TextView mysteryText;
     private Button buttonLeft;
     private Button buttonRight;
     private Button mysteryButton;
+    private Button activityButton;
 
     @Override
     public void onLoadFinished(String str){
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.down_button:
                     textView.setText(""+(i-1));
                     break;
+                case R.id.new_activity_button:
+                    ListActivity.start(this);
+                    break;
                 default:
 
             }
@@ -44,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             textView.setText("I Broke :(");
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(String.valueOf(textView.getId()), textView.getText().toString());
     }
 
     @Override
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRight = (Button) findViewById(R.id.up_button);
         buttonLeft = (Button) findViewById(R.id.down_button);
         mysteryButton = (Button) findViewById(R.id.mystery_button);
+        activityButton = (Button) findViewById(R.id.new_activity_button);
 
         mysteryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonRight.setOnClickListener(this);
         buttonLeft.setOnClickListener(this);
+        activityButton.setOnClickListener(this);
 
+        if(savedInstanceState != null)
+            textView.setText(savedInstanceState.getString(String.valueOf(textView.getId())));
 
 
     }
