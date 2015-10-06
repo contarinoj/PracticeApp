@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoadFinished{
-    public static final String MAIN_ACTIVITY = "main_activity";
+    //public static final String KEY = "main_activity";
     private TextView textView;
     private TextView mysteryText;
     private Button buttonLeft;
@@ -17,6 +17,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mysteryButton;
     private Button activityButton;
     private Button fragmentButton;
+
+    private void clearButtons()//This method is mainly for getting the warnings
+                                             // about making the buttons local       to go away.
+    {
+        buttonLeft = null;
+        buttonRight = null;
+        mysteryButton = null;
+        activityButton = null;
+        fragmentButton = null;
+    }
 
     @Override
     public void onLoadFinished(String str){
@@ -121,5 +131,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        clearButtons();
     }
 }
