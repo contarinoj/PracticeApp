@@ -24,6 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.joseph.practiceapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".FragmentActivity"
+            android:label="@string/title_activity_fragment"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joseph.practiceapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

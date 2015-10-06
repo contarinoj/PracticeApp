@@ -43,12 +43,26 @@
         android:text=""
         android:id="@+id/output_text"/>
 
-    <Button
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_activity_button_text"
-        android:id="@+id/new_activity_button"/>
+        android:gravity ="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_activity_button_text"
+            android:id="@+id/new_activity_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_button_text"
+            android:id="@+id/fragment_button"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

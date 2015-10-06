@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonRight;
     private Button mysteryButton;
     private Button activityButton;
+    private Button fragmentButton;
 
     @Override
     public void onLoadFinished(String str){
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.new_activity_button:
                     ListActivity.start(this);
                     break;
+                case R.id.fragment_button:
+                    FragmentActivity.start(this);
+                    break;
                 default:
 
             }
@@ -55,12 +59,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(String.valueOf(textView.getId()), textView.getText().toString());
+        outState.putString(String.valueOf(mysteryText.getId()), mysteryText.getText().toString());
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().add(HeadlessFragment.newInstance(),"fragment_headless").commit();
         textView = (TextView) findViewById(R.id.not_button);
         mysteryText = (TextView) findViewById(R.id.output_text);
 
@@ -68,21 +75,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonLeft = (Button) findViewById(R.id.down_button);
         mysteryButton = (Button) findViewById(R.id.mystery_button);
         activityButton = (Button) findViewById(R.id.new_activity_button);
+        fragmentButton = (Button) findViewById(R.id.fragment_button);
 
         mysteryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mysteryText.setText(R.string.default_loading_text);
-                new LoadingTask(MainActivity.this).execute();
+                if(((HeadlessFragment)getSupportFragmentManager().findFragmentByTag("fragment_headless")).work("d20")) {
+                    mysteryText.setText(R.string.default_loading_text);
+                    //new LoadingTask(MainActivity.this).execute();
+                }
             }
         });
 
         buttonRight.setOnClickListener(this);
         buttonLeft.setOnClickListener(this);
         activityButton.setOnClickListener(this);
+        fragmentButton.setOnClickListener(this);
 
-        if(savedInstanceState != null)
+        if(savedInstanceState != null) {
             textView.setText(savedInstanceState.getString(String.valueOf(textView.getId())));
+            mysteryText.setText(savedInstanceState.getString(String.valueOf(mysteryText.getId())));
+        }
 
 
     }
@@ -91,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
